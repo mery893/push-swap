@@ -6,7 +6,7 @@
 /*   By: mennaji <mennaji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 17:32:40 by mennaji           #+#    #+#             */
-/*   Updated: 2023/08/01 17:16:10 by mennaji          ###   ########.fr       */
+/*   Updated: 2023/08/02 15:24:00 by mennaji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+
+typedef struct s_prompt{
+	char *cmd;
+	char **envp;
+	int pid;
+}t_prompt;
 
 typedef enum hanle_error
 {
