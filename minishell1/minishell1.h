@@ -6,7 +6,7 @@
 /*   By: mennaji <mennaji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 17:32:40 by mennaji           #+#    #+#             */
-/*   Updated: 2023/08/02 15:24:00 by mennaji          ###   ########.fr       */
+/*   Updated: 2023/08/13 15:54:29 by mennaji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,19 @@ typedef struct s_prompt{
 	int pid;
 }t_prompt;
 
-typedef enum hanle_error
+typedef enum e_handle_error
 {
-	NO_EXISTING_FILE,
-	ERROR_NUM_ARGS,
-	TOO_MANY_ARGS_ERROR,
-	ENV_NOT_FOUND,
-	INVALID_ENV,
-	ARGS_ERROR,
-	TOKEN_NOT_RECOGNIZED,
-	ERROR_INPUT,
-	PATH_ERROR,
-	EXIT_ARGS_ERROR,
-	PWD_INVALID_ARGS,
 	COMMAND_NOT_FOUND,
-	COMMAND_EXECUTE_FAILED,
+	SYNTAX_ERRORS,
+	REDIRECTION_ERRORS,
+	PERMISSION_ERRORS,
+	MEMORY_ALL_ERRORS,
+	ENV_VAR_ERRORS,
+	FILE_NOT_FOUND,
+	BUILT_IN_COMMAND_ERRORS,
+	INPUT_ERRORS,
+	PIPE_RED_ERRORS,
+	INVALID_ARG_ERRORS
 } t_handle_error;
 
 #endif
