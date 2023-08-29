@@ -6,7 +6,7 @@
 /*   By: mennaji <mennaji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 17:32:40 by mennaji           #+#    #+#             */
-/*   Updated: 2023/08/19 18:29:50 by mennaji          ###   ########.fr       */
+/*   Updated: 2023/08/29 15:12:56 by mennaji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,12 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <readline/readline.h>
+#include <readline/history.h>
 
-typedef struct s_prompt{
+
+typedef struct s_prompt
+{
 	char *cmds;
 	char **envp;
 	int pid;
@@ -26,8 +30,9 @@ typedef struct s_prompt{
 
 typedef struct s_list
 {
+	/* data */
 	void *content;
-	t_list struct *next;
+	struct s_list *next;
 }t_list;
 
 typedef struct s_mini
