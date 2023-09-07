@@ -6,14 +6,14 @@
 /*   By: mennaji <mennaji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 17:37:35 by mennaji           #+#    #+#             */
-/*   Updated: 2023/08/29 16:06:09 by mennaji          ###   ########.fr       */
+/*   Updated: 2023/09/07 16:31:55 by mennaji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell1.h"
 
 int build_cd(t_prompt *info);
-int build_exit(t_prompt *info);
+int build_exit(t_list *cmd, int *check_exit)
 int build_export(t_prompt *info);
 int build_unset(t_prompt *info);
 int build_echo(t_mini *node);
@@ -141,4 +141,29 @@ int build_cd(t_prompt *info)
 	info->envp =  set_or_update("PWD", new_path, info->envp, 3);
 	free(new_path);
 	return (0);
+}
+
+int pwd(void)
+{
+	char *buffer;
+
+	buffer = getcwd(NULL, 0); //used to store the path of the current working directory, NULL allocate memory, 0 specifie the size of the buffer used to store the path
+	ft_putendl_fd(buffer, 1); //used to print the content of the content of buffer to the standard output(file descriptor 1)
+	free(buffer);
+	return (0);
+
+}
+
+int build_exit(t_list *cmd, int *check_exit)
+{
+	t_mini *node;
+	long exit_status[2];
+	node = cmd->content;
+	*check_exit = !cmd->next; ///check iif the next command is an exit
+	if(*check_exit)
+		ft_putstr_fd("exit\n", 2); //if it's true this means then cmd is an exit cmd so the program print exit to the standard eror stream (file descriptor)
+	if(!node->full_cmd || !node->full_cmd[1])
+		return(0);
+	exit_status[1] = ft_atoi(node->full_cmd[1]);
+
 }
