@@ -6,19 +6,19 @@
 /*   By: mennaji <mennaji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 17:37:35 by mennaji           #+#    #+#             */
-/*   Updated: 2023/09/07 16:31:55 by mennaji          ###   ########.fr       */
+/*   Updated: 2023/09/08 14:44:34 by mennaji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell1.h"
 
-int build_cd(t_prompt *info);
-int build_exit(t_list *cmd, int *check_exit)
+int build_cd(t_prompt *info);//done
+int build_exit(t_list *cmd, int *check_exit);//done
 int build_export(t_prompt *info);
 int build_unset(t_prompt *info);
-int build_echo(t_mini *node);
-int builtin_command(t_prompt *prompt, t_list *cmd, int *is_exit, int n);
-int is_builtin(t_mini *n);
+int build_echo(t_mini *node); //done
+int builtin_command(t_prompt *prompt, t_list *cmd, int *is_exit, int n);//done
+int is_builtin(t_mini *n);//done
 
 int build_echo(t_mini *node)
 {
@@ -158,6 +158,7 @@ int build_exit(t_list *cmd, int *check_exit)
 {
 	t_mini *node;
 	long exit_status[2];
+
 	node = cmd->content;
 	*check_exit = !cmd->next; ///check iif the next command is an exit
 	if(*check_exit)
@@ -165,5 +166,18 @@ int build_exit(t_list *cmd, int *check_exit)
 	if(!node->full_cmd || !node->full_cmd[1])
 		return(0);
 	exit_status[1] = ft_atoi(node->full_cmd[1]);
-
+	if(!exit_status[1]){
+		ft_putstr_fd("minishell: exit: ", 2);
+		ft_putstr_fd(node->full_cmd[1], 2);
+		ft_putstr_fd("exit: numeric argument required\n", 2);
+		retrun(255);
+	}
+	else if(node->full_cmd[1])
+	{
+		check_exit = 0;
+		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
+		return (1);
+	}
+	exit_status[0] %= 256 + 256 *(exit_status[0] <  0);
+	return(exit_status);
 }
