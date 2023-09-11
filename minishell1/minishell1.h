@@ -6,7 +6,7 @@
 /*   By: mennaji <mennaji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 17:32:40 by mennaji           #+#    #+#             */
-/*   Updated: 2023/08/29 15:12:56 by mennaji          ###   ########.fr       */
+/*   Updated: 2023/09/11 09:55:19 by mennaji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_list
 typedef struct s_mini
 {
 	char	**full_cmd; //array  of strings representing the full command and its arguments
-	char	*full_path;
+	char	**full_path;
 
 }			t_mini;
 typedef enum e_handle_error

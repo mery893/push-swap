@@ -6,7 +6,7 @@
 /*   By: mennaji <mennaji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 17:37:35 by mennaji           #+#    #+#             */
-/*   Updated: 2023/09/08 14:44:34 by mennaji          ###   ########.fr       */
+/*   Updated: 2023/09/11 12:14:00 by mennaji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,4 +180,35 @@ int build_exit(t_list *cmd, int *check_exit)
 	}
 	exit_status[0] %= 256 + 256 *(exit_status[0] <  0);
 	return(exit_status);
+}
+
+int build_export(t_prompt *prompt)
+{
+
+	char **argv;
+	int pos;
+	int i;
+
+	i = 1;
+	argv = ((t_mini *)prompt->cmds->content)->full_cmd;
+	while(argv[i] != NULL)
+	{
+		//it pass the current environment variable
+		pos = var_in_envp(argv[i], prompt->envp, i);
+		//variable is already exist
+		if(pos >=0)
+		{
+			free(prompt->envp[pos]);
+			prompt->envp[pos] = ft_strdup(argv[1]);
+		}
+		//var not found
+		else if(pos == -1)
+			prompt->envp = ft_extend_matrix(prompt->envp, argv[i]); //extends the prompt->envp array by adding the new variable
+		i++;
+	}
+	return (0);
+}
+
+int build_unset(t_prompt *prompt){
+	
 }
