@@ -6,7 +6,7 @@
 /*   By: mennaji <mennaji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 17:37:35 by mennaji           #+#    #+#             */
-/*   Updated: 2023/09/11 12:14:00 by mennaji          ###   ########.fr       */
+/*   Updated: 2023/09/15 05:07:08 by mennaji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,7 +208,31 @@ int build_export(t_prompt *prompt)
 	}
 	return (0);
 }
+ //i should take take the variable an the enviremnt array
+ //iterate throught the environment array and find the variale you want to remove
+ //once you found the variable, remove it from the environment array(shifting the subsequence elements up)
+ 
+int build_unset(t_prompt *prompt)
+{
 
-int build_unset(t_prompt *prompt){
-	
+	char **argv;
+	char *variable;
+	int i;
+
+	i = 1;
+	argv = ((t_mini *)prompt->cmds->content)->full_cmd;
+	//check if there are at least two arguments
+	if(ft_strlen(argv) < 2)
+		retrun(0);
+	while(argv[i] != NULL)
+	{
+		if(argv[i][ft_strlen(argv[i]) - 1] != '='){
+			variable = ft_strjoin(argv[i], "=");
+			free(argv[i]);
+			argv[i] = variable;
+		}
+		i++;
+		remove_unset(prompt->envp, argv[i]);
+	}
+	return(0);
 }
